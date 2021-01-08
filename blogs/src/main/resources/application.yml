@@ -31,6 +31,7 @@ spring: # 数据源配置
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 mybatis:
-  type-aliases-package: org.king2.blogs.pojo # 实体类位置
+  type-aliases-package: com.mxx.blogs.pojo # 实体类位置
   configuration:
     map-underscore-to-camel-case: true # 开启驼峰命名法
+  mapper-locations: classpath:mappers/*.xml

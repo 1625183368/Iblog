@@ -1,7 +1,7 @@
 package com.mxx.blogs.utils;
 
 import io.minio.MinioClient;
-import org.king2.blogs.result.SystemResult;
+import com.mxx.blogs.result.SystemResult;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
