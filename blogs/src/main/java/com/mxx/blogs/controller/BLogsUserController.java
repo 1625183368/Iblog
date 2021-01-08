@@ -1,9 +1,9 @@
 package com.mxx.blogs.controller;
 
+import com.mxx.blogs.pojo.BlogsUser;
 import com.mxx.blogs.result.SystemResult;
 import com.mxx.blogs.service.BLogsUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,9 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 public class BLogsUserController {
     @Autowired
     private BLogsUserService bLogsUserService;
-    @PostMapping("/login")
-    public SystemResult login(String userName, String passWord, HttpServletRequest request, HttpServletResponse response){
-
+    @RequestMapping("/login")
+    public SystemResult login( String userName,String passWord, HttpServletRequest request, HttpServletResponse response){
         return bLogsUserService.login(userName, passWord,request,response);
+    }
+
+    @RequestMapping("/register")
+    public SystemResult register(BlogsUser user){
+        return bLogsUserService.register(user);
     }
 }

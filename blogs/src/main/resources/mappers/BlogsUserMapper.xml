@@ -16,8 +16,12 @@
         <result column="retain3" property="retain3"/>
         <result column="u_image" property="uImage"/>
     </resultMap>
-    <select id="getUserByNameAndPassword" resultMap="UserMap">
+    <select id="getUserByName" resultMap="UserMap">
         select *from blogs_user
-        where user_name = #{username} and pass_word = #{password}
+        where user_name = #{username}
     </select>
+    <insert id="insertIntoUser">
+        insert into blogs_user (user_name,pass_word,u_name,u_image,create_time,state)
+        values (#{user.userName},MD5(#{user.passWord}),#{user.uName},#{user.uImage},#{user.createTime},#{user.state})
+    </insert>
 </mapper>

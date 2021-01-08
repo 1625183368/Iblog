@@ -5,5 +5,6 @@ import org.apache.ibatis.annotations.Param;
 
 public interface BlogsUserMapper {
 
-    BlogsUser getUserByNameAndPassword(@Param("username") String userName,@Param("password") String passWord);
+    BlogsUser getUserByName(@Param("username") String userName);
+    void insertIntoUser(@Param("user") BlogsUser user);
 }
