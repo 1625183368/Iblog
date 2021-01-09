@@ -26,6 +26,12 @@
 
 
         <dependencies>
+            <!-- redis -->
+            <dependency>
+                <groupId>com.mxx</groupId>
+                <artifactId>cached-redis</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
             <!-- Spring-web -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

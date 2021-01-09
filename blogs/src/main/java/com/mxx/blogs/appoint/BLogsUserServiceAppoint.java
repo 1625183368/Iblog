@@ -17,7 +17,8 @@ import java.util.Date;
 public class BLogsUserServiceAppoint {
     @Autowired
     private BlogsUserMapper blogsUserMapper;
-    public static SystemResult checkUserInfo(String userName, String passWord) {
+
+    public SystemResult checkUserInfo(String userName, String passWord) {
 
         // 校验用户名
         if (StringUtils.isEmpty(userName) || userName.length() < 7 || userName.length() > 11) {
@@ -31,7 +32,8 @@ public class BLogsUserServiceAppoint {
         return new SystemResult(200);
 
     }
-    public static void commitUserInfo(BLogsIndexDto dto, BlogsUser user){
+
+    public static void commitUserInfo(BLogsIndexDto dto, BlogsUser user) {
         dto.setUName(user.getUserName());
         dto.setUserName(user.getUserName());
         dto.setUserIcon(user.getUImage());
@@ -41,22 +43,23 @@ public class BLogsUserServiceAppoint {
      * uName
      * Username
      * Password
+     *
      * @return
      */
-    public SystemResult checkRegisterInfo(BlogsUser user){
-        if (user == null ){
-            return new SystemResult(100,"请填写表单信息");
+    public SystemResult checkRegisterInfo(BlogsUser user) {
+        if (user == null) {
+            return new SystemResult(100, "请填写表单信息");
         }
         SystemResult checkUserResult = checkUserInfo(user.getUserName(), user.getPassWord());
-        if (checkUserResult.getStatus()!= 200){
+        if (checkUserResult.getStatus() != 200) {
             return checkUserResult;
         }
-        if (StringUtils.isEmpty(user.getUName())||user.getUName().length()>5||user.getUName().length()<1){
-            return new SystemResult(100,"名字在1到5字符");
+        if (StringUtils.isEmpty(user.getUName()) || user.getUName().length() > 5 || user.getUName().length() < 1) {
+            return new SystemResult(100, "名字在1到5字符");
         }
         BlogsUser checkUserName = blogsUserMapper.getUserByName(user.getUserName());
-        if (checkUserName!=null){
-            return new SystemResult(100,"账号已存在");
+        if (checkUserName != null) {
+            return new SystemResult(100, "账号已存在");
         }
         user.setCreateTime(new Date());
         user.setUImage("./public/images/github.png");
@@ -64,4 +67,6 @@ public class BLogsUserServiceAppoint {
 
         return new SystemResult(200);
     }
+
+
 }

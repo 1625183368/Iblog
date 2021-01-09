@@ -1,7 +1,6 @@
 package com.mxx.blogs.enums;
 
-enum BLogSystemState {
-
+public enum BlogSysState {
     ERROR("系统内部异常", 500),
     SUCCESS("操作成功", 200),
     FIELD("字段解析错误", 100),
@@ -10,14 +9,14 @@ enum BLogSystemState {
     USER_EDIT_COOKIE("用户修改了COOKIE信息", 503),
     USER_NOT_LOGIN("用户没有登录", 401);
 
-    BLogSystemState(String KEY, Integer VALUE) {
-        this.KEY = KEY;
-        this.VALUE = VALUE;
-    }
-
 
     private String KEY;
     private Integer VALUE;
+
+    BlogSysState(String KEY, int VALUE) {
+        this.KEY = KEY;
+        this.VALUE = VALUE;
+    }
 
     public String getKEY() {
         return KEY;

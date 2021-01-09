@@ -1,0 +1,10 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: Cache-Redis-Server
+  redis:
+    host: localhost
+    port: 6379
+

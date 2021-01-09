@@ -1,6 +1,7 @@
 package com.mxx.blogs.service.impl;
 
 import com.mxx.blogs.appoint.BLogsUserServiceAppoint;
+import com.mxx.blogs.contants.UserContants;
 import com.mxx.blogs.dto.BLogsIndexDto;
 import com.mxx.blogs.mapper.BlogsUserMapper;
 import com.mxx.blogs.pojo.BlogsUser;
@@ -20,8 +21,8 @@ import java.util.concurrent.locks.ReentrantLock;
 @Service
 @SuppressWarnings(value = "all")
 public class BLogsUserServiceImpl implements BLogsUserService{
-    public static final String USER_KEY="Redis_key";
     private static final Lock USER_REGISTER_LOCK = new ReentrantLock(true);
+
     @Autowired
     private BlogsUserMapper blogsUserMapper;
     @Autowired
@@ -29,7 +30,7 @@ public class BLogsUserServiceImpl implements BLogsUserService{
 
     @Override
     public SystemResult login(String userName, String passWord, HttpServletRequest request, HttpServletResponse response) {
-        SystemResult systemResult = BLogsUserServiceAppoint.checkUserInfo(userName, passWord);
+        SystemResult systemResult = bLogsUserServiceAppoint.checkUserInfo(userName, passWord);
         if (systemResult.getStatus() != 200){
             return systemResult;
         }
@@ -42,8 +43,8 @@ public class BLogsUserServiceImpl implements BLogsUserService{
         }
         BLogsIndexDto dto = new BLogsIndexDto();
         BLogsUserServiceAppoint.commitUserInfo(dto,user);
-        CookieUtils.setCookie(request,response, USER_KEY, JsonUtils.objectToJson(dto),60*60*24*7);
 
+        CookieUtils.setCookie(request,response, UserContants.USER_KEY, JsonUtils.objectToJson(dto),60*60*24*7);
         return new SystemResult(200);
     }
 
