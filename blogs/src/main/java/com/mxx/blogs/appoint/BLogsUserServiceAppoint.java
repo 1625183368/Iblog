@@ -36,7 +36,7 @@ public class BLogsUserServiceAppoint {
     public static void commitUserInfo(BLogsIndexDto dto, BlogsUser user) {
         dto.setUName(user.getUserName());
         dto.setUserName(user.getUserName());
-        dto.setUserIcon(user.getUImage());
+        dto.setUImage(user.getUImage());
     }
 
     /**

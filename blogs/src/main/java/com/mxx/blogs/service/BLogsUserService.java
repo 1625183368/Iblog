@@ -9,4 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 public interface BLogsUserService {
     SystemResult login(String userName, String passWord, HttpServletRequest request, HttpServletResponse response);
     SystemResult register(BlogsUser user);
+    SystemResult login(String userName, String passWord, HttpServletRequest request, HttpServletResponse response
+            , Boolean isMd5) throws Exception;
 }

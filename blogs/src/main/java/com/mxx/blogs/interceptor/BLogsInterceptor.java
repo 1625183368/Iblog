@@ -31,7 +31,7 @@ public class BLogsInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String cookieValue = CookieUtils.getCookieValue(request, UserContants.USER_KEY,true);
-        SystemResult result = BLogsIndexAppoint.checkCookieUser(request,response);
+        SystemResult result = BLogsIndexAppoint.checkCookieUser(cookieValue);
         if (result.getStatus() != BlogSysState.SUCCESS.getVALUE()){
             return true;
         }
@@ -40,7 +40,7 @@ public class BLogsInterceptor implements HandlerInterceptor {
 
 
         /////////////////////////////////////
-        SystemResult databaseData = bLogsUserService.login(cookieData.getUserName(),cookieData.getPassWord(),request,response);
+        SystemResult databaseData = bLogsUserService.login(cookieData.getUserName(),cookieData.getPassWord(),request,response,false);
         if (databaseData.getStatus() == 200){
             BLogsIndexDto dto= (BLogsIndexDto) databaseData.getData();
             //将信息写入redis
@@ -48,6 +48,7 @@ public class BLogsInterceptor implements HandlerInterceptor {
         }else{
             CookieUtils.deleteCookie(request,response,UserContants.USER_KEY);
         }
+        //数据写入request
         request.setAttribute("user",(BlogsUser)databaseData.getData());
         return true;
     }

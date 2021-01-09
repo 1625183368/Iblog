@@ -78,13 +78,11 @@
                 <version>1.18.16</version>
                 <scope>provided</scope>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+            </dependency>
 
-            <!-- WebKingCache依赖 -->
-<!--            <dependency>-->
-<!--                <groupId>com.king2.luqiqi</groupId>-->
-<!--                <artifactId>CACHE-KING2-V1.0</artifactId>-->
-<!--                <version>1.0-SNAPSHOT</version>-->
-<!--            </dependency>-->
 
         </dependencies>
 

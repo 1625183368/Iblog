@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 public class BLogsIndexServiceImpl implements BLogsIndexService {
     @Autowired
     private BLogsIndexAppoint bLogsIndexAppoint;
-    @Autowired
-    private BLogsUserServiceAppoint bLogsUserServiceAppoint;
+
     @Override
     public SystemResult index(HttpServletRequest request) throws Exception {
         Object user = request.getAttribute("user");
+        System.out.println(user);
         BLogsIndexDto dto = new BLogsIndexDto();
         if (user == null){
             dto.setLogin(false);

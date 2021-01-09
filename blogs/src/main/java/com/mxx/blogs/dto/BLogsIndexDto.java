@@ -9,7 +9,7 @@ import java.util.List;
 public class BLogsIndexDto {
     private String uName;
     private String userName;
-    private String userIcon;
+    private String uImage;
     private String passWord;
     private boolean isLogin;
     private List<BlogsArticle> articles;

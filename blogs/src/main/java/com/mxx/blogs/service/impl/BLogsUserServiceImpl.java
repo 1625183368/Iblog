@@ -65,4 +65,9 @@ public class BLogsUserServiceImpl implements BLogsUserService{
         }
         return new SystemResult(100);
     }
+
+    @Override
+    public SystemResult login(String userName, String passWord, HttpServletRequest request, HttpServletResponse response, Boolean isMd5) throws Exception {
+        return login(userName,passWord,request,response,true);
+    }
 }
