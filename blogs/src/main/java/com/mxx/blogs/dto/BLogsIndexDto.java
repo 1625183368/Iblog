@@ -13,4 +13,12 @@ public class BLogsIndexDto {
     private String passWord;
     private boolean isLogin;
     private List<BlogsArticle> articles;
+
+    public boolean isLogin() {
+        return isLogin;
+    }
+
+    public void setLogin(boolean login) {
+        isLogin = login;
+    }
 }

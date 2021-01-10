@@ -11,17 +11,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Component
 public class BLogsIndexAppoint {
     @Autowired
     private ArticleMapper articleMapper;
-    public static SystemResult checkCookieUser(String cookieValue) throws Exception {
+    public static SystemResult checkCookieUser(String cookieValue, HttpServletRequest request) throws Exception {
 
         //查cookie
         if (StringUtils.isEmpty(cookieValue)) {
-            return new SystemResult(100, "用户未登录");
+            return new SystemResult(BlogSysState.USER_NO_LOGIN.getVALUE(), "用户未登录");
         }
         BLogsIndexDto userInfoDto = null;
         try {
@@ -29,6 +30,7 @@ public class BLogsIndexAppoint {
         } catch (Exception e) {
             return new SystemResult(BlogSysState.USER_EDIT_COOKIE.getVALUE(), "cookie被修改");
         }
+
         //未登录
         if (userInfoDto == null) {
             return new SystemResult(BlogSysState.USER_NO_LOGIN.getVALUE(), "用户未登录");

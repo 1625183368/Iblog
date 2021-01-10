@@ -4,9 +4,9 @@ import com.mxx.blogs.appoint.BLogsIndexAppoint;
 import com.mxx.blogs.contants.UserContants;
 import com.mxx.blogs.dto.BLogsIndexDto;
 import com.mxx.blogs.enums.BlogSysState;
+import com.mxx.blogs.mapper.BlogsUserMapper;
 import com.mxx.blogs.pojo.BlogsUser;
 import com.mxx.blogs.result.SystemResult;
-import com.mxx.blogs.service.BLogsUserService;
 import com.mxx.blogs.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,13 +25,14 @@ public class BLogsInterceptor implements HandlerInterceptor {
      * @return 登录信息
      * @throws Exception
      */
+//    @Autowired
+//    private BLogsUserService bLogsUserService;
     @Autowired
-    private BLogsUserService bLogsUserService;
-
+    private BlogsUserMapper blogsUserMapper;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String cookieValue = CookieUtils.getCookieValue(request, UserContants.USER_KEY,true);
-        SystemResult result = BLogsIndexAppoint.checkCookieUser(cookieValue);
+        SystemResult result = BLogsIndexAppoint.checkCookieUser(cookieValue,request);
         if (result.getStatus() != BlogSysState.SUCCESS.getVALUE()){
             return true;
         }
@@ -40,16 +41,17 @@ public class BLogsInterceptor implements HandlerInterceptor {
 
 
         /////////////////////////////////////
-        SystemResult databaseData = bLogsUserService.login(cookieData.getUserName(),cookieData.getPassWord(),request,response,false);
-        if (databaseData.getStatus() == 200){
-            BLogsIndexDto dto= (BLogsIndexDto) databaseData.getData();
-            //将信息写入redis
-            //
-        }else{
-            CookieUtils.deleteCookie(request,response,UserContants.USER_KEY);
-        }
+//        SystemResult databaseData = bLogsUserService.login(cookieData.getUserName(),cookieData.getPassWord(),request,response,false);
+        BlogsUser blogsUser = blogsUserMapper.getUserByName(cookieData.getUserName());
+//        if (blogsUser != null){
+//            //BLogsIndexDto dto= (BLogsIndexDto) databaseData.getData();
+//            //将信息写入redis
+//            //
+//        }else{
+//            CookieUtils.deleteCookie(request,response,UserContants.USER_KEY);
+//        }
         //数据写入request
-        request.setAttribute("user",(BlogsUser)databaseData.getData());
+        request.setAttribute("user",blogsUser);
         return true;
     }
 }
